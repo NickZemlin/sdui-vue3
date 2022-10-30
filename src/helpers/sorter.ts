@@ -201,7 +201,6 @@ function sortRankedValues<ItemType>(
   const same = aRank === bRank;
   if (same) {
     if (aKeyIndex === bKeyIndex) {
-      // use the base sort function as a tie-breaker
       return baseSort(a, b);
     } else {
       return aKeyIndex < bKeyIndex ? aFirst : bFirst;
