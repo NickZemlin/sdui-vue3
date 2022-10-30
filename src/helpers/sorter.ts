@@ -56,7 +56,7 @@ function getHighestRanking<ItemType>(
     const stringItem = item as unknown as string;
     return {
       rankedValue: stringItem,
-      rank: getMatchRanking(stringItem, value, options),
+      rank: getMatchRanking(stringItem, value),
       keyIndex: -1,
       keyThreshold: options.threshold,
     };
@@ -68,7 +68,7 @@ function getHighestRanking<ItemType>(
       { itemValue, attributes },
       i
     ) => {
-      let newRank = getMatchRanking(itemValue, value, options);
+      let newRank = getMatchRanking(itemValue, value);
       let newRankedValue = rankedValue;
       const { minRanking, maxRanking, threshold } = attributes;
       if (newRank < minRanking && newRank >= rankings.MATCHES) {
@@ -93,13 +93,9 @@ function getHighestRanking<ItemType>(
   );
 }
 
-function getMatchRanking<ItemType>(
-  testString: string,
-  stringToRank: string,
-  options: MatchSorterOptions<ItemType>
-): Ranking {
-  testString = prepareValueForComparison(testString, options);
-  stringToRank = prepareValueForComparison(stringToRank, options);
+function getMatchRanking(testString: string, stringToRank: string): Ranking {
+  testString = prepareValueForComparison(testString);
+  stringToRank = prepareValueForComparison(stringToRank);
 
   if (stringToRank.length > testString.length) {
     return rankings.NO_MATCH;
@@ -215,10 +211,7 @@ function sortRankedValues<ItemType>(
   }
 }
 
-function prepareValueForComparison<ItemType>(
-  value: string,
-  { keepDiacritics }: MatchSorterOptions<ItemType>
-): string {
+function prepareValueForComparison(value: string): string {
   value = `${value}`;
   return value;
 }
