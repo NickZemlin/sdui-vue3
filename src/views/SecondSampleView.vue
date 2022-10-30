@@ -3,5 +3,5 @@ import SamplePageImg from "@/components/SamplePageImg/SamplePageImg.vue";
 </script>
 
 <template>
-  <SamplePageImg :img-src="'src/assets/graffiti.jpg'" />
+  <SamplePageImg :img-src="'../assets/graffiti.jpg'" />
 </template>
